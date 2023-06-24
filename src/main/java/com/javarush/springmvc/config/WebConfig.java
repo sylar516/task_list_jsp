@@ -27,7 +27,6 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("task_list");
     }
 
-    //метод, позволяет использовать статические ресурсы, такие как файлы стилей css, картинки и тд
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/jsp/**").addResourceLocations("/jsp/");

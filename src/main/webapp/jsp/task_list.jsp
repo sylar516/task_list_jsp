@@ -4,7 +4,7 @@
 <head>
     <title>Лист задач</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/my.css">
+    <link rel="stylesheet" href="/css/my.css">
 </head>
 <body onload="showTaskList(0)">
 <table id="tasks">

@@ -1,7 +1,7 @@
 package com.javarush.springmvc.controller;
 
 import com.javarush.springmvc.domain.Task;
-import com.javarush.springmvc.domain.TaskInfo;
+import com.javarush.springmvc.domain.TaskDTO;
 import com.javarush.springmvc.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +16,10 @@ public class TaskController {
     private TaskService taskService;
 
     @GetMapping()
-    public List<TaskInfo> getAllTasks(@RequestParam(required = false) Integer pageNumber,
-                                  @RequestParam(required = false) Integer pageSize) {
+    public List<TaskDTO> getAllTasks(@RequestParam(required = false) Integer pageNumber,
+                                     @RequestParam(required = false) Integer pageSize) {
         List<Task> allTasksOnPage = taskService.getAllTasksOnPage(pageNumber, pageSize);
-        return allTasksOnPage.stream().map(this::toTaskInfo).collect(Collectors.toList());
+        return allTasksOnPage.stream().map(this::toTaskDTO).collect(Collectors.toList());
     }
 
     @GetMapping("/count")
@@ -32,17 +32,16 @@ public class TaskController {
         return taskService.getTask(id);
     }
 
-    //дописать метод по сазданию задачи в базу данных
     @PostMapping
-    public TaskInfo createTask(@RequestBody TaskInfo taskInfo) {
-        Task task = taskService.createTask(taskInfo.description, taskInfo.status);
-        return toTaskInfo(task);
+    public TaskDTO createTask(@RequestBody TaskDTO taskDTO) {
+        Task task = taskService.createTask(taskDTO.description, taskDTO.status);
+        return toTaskDTO(task);
     }
 
     @PostMapping("/{ID}")
-    public TaskInfo saveTask(@PathVariable("ID") Integer id, @RequestBody TaskInfo taskInfo) {
-        Task task = taskService.saveOrUpdateTask(id, taskInfo.description, taskInfo.status);
-        return toTaskInfo(task);
+    public TaskDTO saveTask(@PathVariable("ID") Integer id, @RequestBody TaskDTO taskDTO) {
+        Task task = taskService.saveOrUpdateTask(id, taskDTO.description, taskDTO.status);
+        return toTaskDTO(task);
     }
 
     @DeleteMapping("/{ID}")
@@ -50,11 +49,11 @@ public class TaskController {
         taskService.deleteTask(id);
     }
 
-    private TaskInfo toTaskInfo(Task task) {
-        TaskInfo taskInfo = new TaskInfo();
-        taskInfo.id = task.getId();
-        taskInfo.description = task.getDescription();
-        taskInfo.status = task.getStatus();
-        return taskInfo;
+    private TaskDTO toTaskDTO(Task task) {
+        TaskDTO taskDTO = new TaskDTO();
+        taskDTO.id = task.getId();
+        taskDTO.description = task.getDescription();
+        taskDTO.status = task.getStatus();
+        return taskDTO;
     }
 }
