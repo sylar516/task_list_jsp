@@ -15,10 +15,6 @@ public class TaskService {
     @Autowired
     private TaskDAO taskDAO;
 
-    public List<Task> getAllTasks() {
-        return taskDAO.getAllTasks();
-    }
-
     public long getTasksCount() {
         return taskDAO.getTasksCount();
     }

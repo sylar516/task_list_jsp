@@ -19,12 +19,6 @@ public class TaskDAO {
         return currentSession.get(Task.class, id);
     }
 
-    public List<Task> getAllTasks() {
-        Session currentSession = sessionFactory.getCurrentSession();
-        Query<Task> query = currentSession.createQuery("from Task", Task.class);
-        return query.getResultList();
-    }
-
     public long getTasksCount() {
         Session currentSession = sessionFactory.getCurrentSession();
         Query<Long> query = currentSession.createQuery("select count(t) from Task t", Long.class);
