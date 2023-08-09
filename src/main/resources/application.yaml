@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/todo
+    username: root
+    password: root
+  mvc:
+    view:
+      prefix: /views/
+      suffix: .jsp
+    servlet:
+      path: /spring_jr/
+  web:
+    resources:
+      static-path-pattern:
+        - "/views/**"
+        - "/css/**"
